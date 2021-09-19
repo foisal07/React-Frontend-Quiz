@@ -5,13 +5,14 @@ import Form from "../Form";
 import Illustration from "../Illustration";
 import TextInput from "../TextInput";
 import loginImage from "../../assets/images/login.svg";
+import {Link} from 'react-router-dom'
 
 export default function Login() {
   return (
     <div>
       <h1>Login to your account</h1>
       <div class="column">
-        <Illustration src= {`${loginImage}`} alt="loginImage" />
+        <Illustration src={`${loginImage}`} alt="loginImage" />
         <Form className={`${classes.login}`}>
           <TextInput
             type="text"
@@ -24,7 +25,7 @@ export default function Login() {
           <Button>Submit Now</Button>
 
           <div class="info">
-            Don't have an account? <a href="signup.html">Signup</a> instead.
+            Don't have an account? <Link to="/signup">Signup</Link> instead.
           </div>
         </Form>
       </div>

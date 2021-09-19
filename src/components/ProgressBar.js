@@ -1,6 +1,6 @@
 import React from "react";
+import Button from "../components/Button";
 import classes from "../styles/ProgressBar.module.css";
-import Button from '../components/Button'
 
 export default function ProgressBar() {
   return (
@@ -10,11 +10,10 @@ export default function ProgressBar() {
           <span className="material-icons-outlined"> arrow_back </span>
         </div>
         <div className={classes.rangeArea}>
-          <div className={classes.tooltip}>24% Cimplete!</div>
+          <div className={classes.tooltip}>25% Complete!</div>
           <div className={classes.rangeBody}>
-            <div className={classes.progress}></div>
+            <div className={classes.progress} style={{ width: "20%" }}></div>
           </div>
-          {/* style={'width: 20%} */}
         </div>
         <a href="result.html">
           <Button className={`${classes.button} next`}>

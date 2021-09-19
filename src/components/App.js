@@ -10,15 +10,15 @@ import Signup from "./pages/Signup";
 function App() {
   return (
     <Router>
-      <Switch>
-        <Layout>
+      <Layout>
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/quiz" component={Quiz} />
           <Route path="/result" component={Result} />
-        </Layout>
-      </Switch>
+        </Switch>
+      </Layout>
     </Router>
   );
 }

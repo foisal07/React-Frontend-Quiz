@@ -1,10 +1,9 @@
-import Button from "./Button";
-import Form from "./Form";
-import TextInput from "./TextInput";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import { useAuth } from "../contexts/AuthContext";
-
+import Button from "./Button";
+import Form from "./Form";
+import TextInput from "./TextInput";
 
 export default function LoginForm() {
   const [email, setEmail] = useState();
@@ -13,7 +12,7 @@ export default function LoginForm() {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
-  const { login} = useAuth();
+  const { login } = useAuth();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -24,7 +23,7 @@ export default function LoginForm() {
       setError("");
       setLoading(true);
       await login(email, password);
-      history.push('/');
+      history.push("/");
     } catch (err) {
       setLoading(false);
       setError("Failed to login!");
@@ -33,24 +32,32 @@ export default function LoginForm() {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} style={{ height: '300px'} }>
+      <Form onSubmit={handleSubmit} style={{ height: "300px" }}>
         <TextInput
           type="text"
           placeholder="Enter email"
           icon="alternate_email"
-                    value={email}
+          value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-          }}/>
+          }}
+        />
 
-        <TextInput type="password" placeholder="Enter password" icon="lock" value={password}
-          onChange= {(e) => {
+        <TextInput
+          type="password"
+          placeholder="Enter password"
+          icon="lock"
+          value={password}
+          onChange={(e) => {
             setPassword(e.target.value);
-          }}/>
+          }}
+        />
 
-        <Button type='submit'>
+        <Button type="submit" disabled={loading}>
           <span>Submit Now</span>
         </Button>
+
+        {error && <p className="error">{error}</p>}
 
         <div class="info">
           Don't have an account? <Link to="/signup">Signup</Link> instead.

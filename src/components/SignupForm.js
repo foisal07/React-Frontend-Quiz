@@ -76,7 +76,7 @@ export default function SignupForm() {
           type="password"
           placeholder="Confirm password"
           icon="lock_clock"
-          value={confirmPassword}
+          value= {confirmPassword}
           onChange={(e) => {
             setConfirmPassword(e.target.value);
           }}

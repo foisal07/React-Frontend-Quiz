@@ -7,6 +7,9 @@ import Login from "./pages/Login";
 import Quiz from "./pages/Quiz";
 import Result from "./pages/Result";
 import Signup from "./pages/Signup";
+import PrivateRouter from "./PrivateRouter";
+import PublicRouter from "./PublicRouter";
+
 function App() {
   return (
     <Router>
@@ -14,10 +17,10 @@ function App() {
         <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route path="/quiz" component={Quiz} />
-            <Route path="/result" component={Result} />
+            <PublicRouter path="/signup" component={Signup} />
+            <PublicRouter path="/login" component={Login} />
+            <PrivateRouter exact path="/quiz" component={Quiz} />
+            <PrivateRouter exact path="/result" component={Result} />
           </Switch>
         </Layout>
       </AuthProvider>

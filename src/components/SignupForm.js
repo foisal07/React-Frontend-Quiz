@@ -32,7 +32,7 @@ export default function SignupForm() {
       setError("");
       setLoading(true);
       await signup(email, password, username);
-      history.push('/');
+      history.push("/");
     } catch (err) {
       setLoading(false);
       setError("Cant create account");
@@ -46,6 +46,7 @@ export default function SignupForm() {
           type="text"
           placeholder="Enter name"
           icon="person"
+          required
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
@@ -56,6 +57,7 @@ export default function SignupForm() {
           type="text"
           placeholder="Enter email"
           icon="alternate_email"
+          required
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
@@ -66,6 +68,7 @@ export default function SignupForm() {
           type="password"
           placeholder="Enter password"
           icon="lock"
+          required
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
@@ -76,7 +79,8 @@ export default function SignupForm() {
           type="password"
           placeholder="Confirm password"
           icon="lock_clock"
-          value= {confirmPassword}
+          required
+          value={confirmPassword}
           onChange={(e) => {
             setConfirmPassword(e.target.value);
           }}
@@ -84,6 +88,7 @@ export default function SignupForm() {
 
         <Checkbox
           text="I agree to the Terms &amp; Conditions"
+          required
           value={agree}
           onChange={(e) => {
             setAgree(e.target.value);

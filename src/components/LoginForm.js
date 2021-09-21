@@ -34,6 +34,7 @@ export default function LoginForm() {
     <>
       <Form onSubmit={handleSubmit} style={{ height: "300px" }}>
         <TextInput
+          required
           type="text"
           placeholder="Enter email"
           icon="alternate_email"
@@ -44,6 +45,7 @@ export default function LoginForm() {
         />
 
         <TextInput
+          required
           type="password"
           placeholder="Enter password"
           icon="lock"

@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
 
-  //listen auth change (login/logout) and update states
+  //listen to auth change (login/logout) and update states
   useEffect(() => {
     const auth = getAuth();
     const unsbscribe = onAuthStateChanged(auth, (user) => {

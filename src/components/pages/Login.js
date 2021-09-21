@@ -3,6 +3,7 @@ import loginImage from "../../assets/images/login.svg";
 import Illustration from "../Illustration";
 import LoginForm from "../LoginForm";
 
+
 export default function Login() {
   return (
     <div>

@@ -9,7 +9,7 @@ export default function Nav() {
         <ul>
           <li>
             <Link to="/" className={classes.brand}>
-              <span class="material-icons-outlined">web</span>{" "}
+              <span className="material-icons-outlined">web</span>{" "}
               <h3>FrontEnd Quiz</h3>
             </Link>
           </li>

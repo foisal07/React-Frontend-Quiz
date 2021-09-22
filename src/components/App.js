@@ -17,8 +17,8 @@ function App() {
         <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            <PublicRouter path="/signup" component={Signup} />
-            <PublicRouter path="/login" component={Login} />
+            <PublicRouter exact path="/signup" component={Signup} />
+            <PublicRouter exact path="/login" component={Login} />
             <PrivateRouter exact path="/quiz" component={Quiz} />
             <PrivateRouter exact path="/result" component={Result} />
           </Switch>

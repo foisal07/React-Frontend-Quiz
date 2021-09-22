@@ -1,7 +1,7 @@
 import React from "react";
-import classes from '../styles/Video.module.css';
-import videoImage from '../assets/images/3.jpg'
 import { Link } from "react-router-dom";
+import videoImage from "../assets/images/3.jpg";
+import classes from "../styles/Video.module.css";
 
 export default function Video() {
   return (

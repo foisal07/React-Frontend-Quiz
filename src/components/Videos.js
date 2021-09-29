@@ -8,8 +8,6 @@ export default function Videos() {
   const [page, setPage] = useState(1);
   const { loading, error, videos, hasMore } = useVideoList(page);
 
-  console.log(videos);
-
   return (
     <div>
       {videos.length > 0 && (
@@ -20,7 +18,7 @@ export default function Videos() {
         >
           {videos.map((video) =>
             video.noq > 0 ? (
-              <Link to="/quiz" key={video.youtubeID}>
+              <Link to={`/quiz/${video.youtubeID}`} key={video.youtubeID}>
                 <Video
                   title={video.title}
                   id={video.youtubeID}

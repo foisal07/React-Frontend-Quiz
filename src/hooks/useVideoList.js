@@ -10,7 +10,6 @@ import {
 import { useEffect, useState } from "react";
 
 export default function useVideoList(page) {
-  console.log(page);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -20,7 +19,6 @@ export default function useVideoList(page) {
   useEffect(() => {
     //fetch videos
     async function fetchVideos() {
-      console.log(page);
       // connect and set request for database
       const database = getDatabase();
       const videoRef = ref(database, "videos");

@@ -10,15 +10,17 @@ import {
 import { useEffect, useState } from "react";
 
 export default function useVideoList(page) {
-  const [videos, setVideos] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-
+  console.log(page);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const [videos, setVideos] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     //fetch videos
     async function fetchVideos() {
+      console.log(page);
       // connect and set request for database
       const database = getDatabase();
       const videoRef = ref(database, "videos");
@@ -26,18 +28,19 @@ export default function useVideoList(page) {
         videoRef,
         orderByKey(),
         startAt("" + page),
-        limitToFirst(10)
+        limitToFirst(8)
       );
 
       try {
         setError(false);
+        setLoading(true);
         //send rquest to database
         const result = await get(videoQuery);
+        setLoading(false);
         if (result.exists()) {
-          setLoading(true);
           //update the local state with fetched videos
           setVideos((prevVideos) => {
-            return [...prevVideos, Object.values(result.val())];
+            return [...prevVideos, ...Object.values(result.val())];
           });
         } else {
           setHasMore(false);

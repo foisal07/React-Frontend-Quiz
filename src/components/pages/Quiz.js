@@ -59,7 +59,7 @@ export default function Quiz() {
   }, [questions]);
 
   // get clicked option and dispatch the option to mark checked true
-  function handleAnswer (e, index) {
+  function handleAnswer(e, index) {
     dispatch({
       type: "answered",
       questionIndex: currrentQuestion,
@@ -67,15 +67,23 @@ export default function Quiz() {
       value: e.target.checked,
     });
   }
-  console.log(qna);
 
   return (
     <>
-      <h1></h1>
-      <h4>Question can have multiple answers</h4>
-      <Answers />
-      <ProgressBar />
-      <MiniPlayer />
+      {loading && <div>Loading...</div>}
+      {error && <div>There was an error!</div>}
+      {!loading && !error && qna && qna.length > 0 && (
+        <>
+          <h1>{qna[currrentQuestion].title}</h1>
+          <h4>Question can have multiple answers</h4>
+          <Answers
+            options={qna[currrentQuestion].options}
+            handleChange={handleAnswer}
+          />
+          <ProgressBar />
+          <MiniPlayer />
+        </>
+      )}
     </>
   );
 }

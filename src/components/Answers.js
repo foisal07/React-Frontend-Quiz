@@ -2,19 +2,20 @@ import React from "react";
 import classes from "../styles/Answers.module.css";
 import Checkbox from "./Checkbox";
 
-export default function Answers() {
+export default function Answers({ options, handleChange }) {
+  console.log(options);
   return (
     <>
       <div className={classes.answers}>
-        <Checkbox text="A new hope1" className={classes.answer}/>
-        <Checkbox text="A new hope2" className={classes.answer}/>
-        <Checkbox text="A new hope3" className={classes.answer}/>
-        <Checkbox text="A new hope4" className={classes.answer}/>
-        <Checkbox text="A new hope5" className={classes.answer}/>
-        <Checkbox text="A new hope6" className={classes.answer}/>
-        <Checkbox text="A new hope7" className={classes.answer}/>
-        <Checkbox text="A new hope8" className={classes.answer}/>
-        <Checkbox text="A new hope9" className={classes.answer}/>
+        {options.map((option, index) => (
+          <Checkbox
+            text={`${option.title}`}
+            className={classes.answer}
+            onChange={handleChange}
+            key={index}
+            value={index}
+          />
+        ))}
       </div>
     </>
   );

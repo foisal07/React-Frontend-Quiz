@@ -1,13 +1,12 @@
 import React from "react";
 import Button from "../components/Button";
 import classes from "../styles/ProgressBar.module.css";
-import { Link } from "react-router-dom";
 
-export default function ProgressBar() {
+export default function ProgressBar({ nextQuestion, prevQuestion }) {
   return (
     <>
       <div className={classes.progressBar}>
-        <div className={classes.backButton}>
+        <div className={classes.backButton} onClick={prevQuestion}>
           <span className="material-icons-outlined"> arrow_back </span>
         </div>
         <div className={classes.rangeArea}>
@@ -16,12 +15,10 @@ export default function ProgressBar() {
             <div className={classes.progress} style={{ width: "20%" }}></div>
           </div>
         </div>
-        <Link to="/result">
-          <Button className={`${classes.button} next`}>
-            <span>Next Question</span>
-            <span className="material-icons-outlined"> arrow_forward </span>
-          </Button>
-        </Link>
+        <Button onClick={nextQuestion}>
+          <span>Next Question</span>
+          <span className="material-icons-outlined"> arrow_forward </span>
+        </Button>
       </div>
     </>
   );

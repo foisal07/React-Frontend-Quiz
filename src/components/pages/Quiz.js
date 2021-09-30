@@ -20,7 +20,7 @@ const reducer = (state, action) => {
       return action.value;
 
     //mark answer checked true
-    case "answer":
+    case "answered":
       // deep copy whole question object to manipulate (keeping data safe)
       const questions = _.cloneDeep(state);
 
@@ -29,7 +29,6 @@ const reducer = (state, action) => {
         action.optionIndex
       ].checked = true;
 
-      console.log(questions);
       return questions;
     default:
       return state;
@@ -42,8 +41,6 @@ export default function Quiz() {
 
   // fetch questions
   const { loading, error, questions } = useQuestions(id);
-
-  console.log(questions);
 
   // set the question number that being rendered
   const [currrentQuestion, setCurrrentQuestion] = useState(0);
@@ -68,6 +65,20 @@ export default function Quiz() {
     });
   }
 
+  // next button clicked update current question number > rerenders and fetch options with next question
+  function handleNextButton() {
+    if (currrentQuestion + 1 < questions.length) {
+      setCurrrentQuestion((prevCurrent) => prevCurrent + 1);
+    }
+  }
+
+  // prev button clicked update current question number > rerenders and fetch options with next question
+  function handlePrevButton() {
+    if (currrentQuestion >= 1 && currrentQuestion <= questions.length) {
+      setCurrrentQuestion((prevCurrent) => prevCurrent - 1);
+    }
+  }
+
   return (
     <>
       {loading && <div>Loading...</div>}
@@ -80,7 +91,10 @@ export default function Quiz() {
             options={qna[currrentQuestion].options}
             handleChange={handleAnswer}
           />
-          <ProgressBar />
+          <ProgressBar
+            nextQuestion={handleNextButton}
+            prevQuestion={handlePrevButton}
+          />
           <MiniPlayer />
         </>
       )}

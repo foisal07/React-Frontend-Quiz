@@ -3,7 +3,6 @@ import classes from "../styles/Answers.module.css";
 import Checkbox from "./Checkbox";
 
 export default function Answers({ options, handleChange }) {
-  console.log(options);
   return (
     <>
       <div className={classes.answers}>
@@ -11,9 +10,10 @@ export default function Answers({ options, handleChange }) {
           <Checkbox
             text={`${option.title}`}
             className={classes.answer}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, index)}
             key={index}
             value={index}
+            checked = {option.checked}
           />
         ))}
       </div>

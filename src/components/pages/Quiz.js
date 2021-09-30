@@ -1,6 +1,8 @@
+import { getDatabase, ref, set } from "@firebase/database";
 import _ from "lodash";
 import React, { useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 import useQuestions from "../../hooks/useQuestions";
 import Answers from "../Answers";
 import MiniPlayer from "../MiniPlayer";
@@ -36,6 +38,9 @@ const reducer = (state, action) => {
 };
 
 export default function Quiz() {
+  // get current user
+  const { currentUser } = useAuth();
+
   // get video id from route url
   const { id } = useParams();
 
@@ -85,6 +90,28 @@ export default function Quiz() {
       ? ((currrentQuestionID + 1) / questions.length) * 100
       : 0;
 
+  // submit answers to database
+  async function submit() {
+    // find which user has submitted the answers
+    // get current user
+
+    // get current user ID
+    const { uid } = currentUser;
+
+    // establish database connection and create current user submitted answers node
+
+    // connect to database
+    const db = getDatabase();
+
+    // create submit answer node for current use
+    const submittedAnswerRef = ref(db, `result/${uid}`);
+
+    // send the answers with videoID into database
+    await set(submittedAnswerRef, {
+      [id]: qna,
+    });
+  }
+
   return (
     <>
       {loading && <div>Loading...</div>}
@@ -101,6 +128,7 @@ export default function Quiz() {
             nextQuestion={handleNextButton}
             prevQuestion={handlePrevButton}
             progress={progress}
+            submit={submit}
           />
           <MiniPlayer />
         </>

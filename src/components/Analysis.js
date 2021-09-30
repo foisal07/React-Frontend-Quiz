@@ -1,24 +1,15 @@
 import React from "react";
-import Answers from "../components/Answers";
+import classes from "../styles/Analysis.module.css";
+import Question from "./Questions";
 
 export default function Analysis() {
   return (
     <>
-      <div className="question">
-        <div className="qtitle">
-          <span className="material-icons-outlined"> help_outline </span> Here
-          goes the question from Learn with Sumit?
-        </div>
+      <div className={classes.analysis}>
+        <h1>Question Analysis</h1>
+        <h4>You answerd 5 out of 10 questions correctly</h4>
       </div>
-      <Answers />
-
-      <div className="question">
-        <div className="qtitle">
-          <span className="material-icons-outlined"> help_outline </span>
-          Here goes the question from Learn with Sumit?
-        </div>
-      </div>
-      <Answers />
+      <Question />
     </>
   );
 }

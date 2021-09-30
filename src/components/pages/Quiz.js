@@ -1,7 +1,7 @@
 import { getDatabase, ref, set } from "@firebase/database";
 import _ from "lodash";
 import React, { useEffect, useReducer, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import useQuestions from "../../hooks/useQuestions";
 import Answers from "../Answers";
@@ -40,6 +40,8 @@ const reducer = (state, action) => {
 export default function Quiz() {
   // get current user
   const { currentUser } = useAuth();
+
+  const history = useHistory();
 
   // get video id from route url
   const { id } = useParams();
@@ -84,16 +86,15 @@ export default function Quiz() {
     }
   }
 
-  // calculate progress
+  // Calculate progress
   const progress =
     questions.length > 0
       ? ((currrentQuestionID + 1) / questions.length) * 100
       : 0;
 
-  // submit answers to database
+  // Submit given answers to database
   async function submit() {
     // find which user has submitted the answers
-    // get current user
 
     // get current user ID
     const { uid } = currentUser;
@@ -103,12 +104,20 @@ export default function Quiz() {
     // connect to database
     const db = getDatabase();
 
-    // create submit answer node for current use
+    // create given answer node for current user
     const submittedAnswerRef = ref(db, `result/${uid}`);
 
     // send the answers with videoID into database
     await set(submittedAnswerRef, {
       [id]: qna,
+    });
+
+    // redirect quiz page to result page and pass the data for analysis
+    history.push({
+      pathname: `/result/${id}`,
+      state: {
+        qna,
+      },
     });
   }
 

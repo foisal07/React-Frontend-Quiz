@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../components/Button";
 import classes from "../styles/ProgressBar.module.css";
 
-export default function ProgressBar({ nextQuestion, prevQuestion }) {
+export default function ProgressBar({ nextQuestion, prevQuestion, progress }) {
   return (
     <>
       <div className={classes.progressBar}>
@@ -10,9 +10,12 @@ export default function ProgressBar({ nextQuestion, prevQuestion }) {
           <span className="material-icons-outlined"> arrow_back </span>
         </div>
         <div className={classes.rangeArea}>
-          <div className={classes.tooltip}>25% Complete!</div>
+          <div className={classes.tooltip}> {progress}% Complete!</div>
           <div className={classes.rangeBody}>
-            <div className={classes.progress} style={{ width: "20%" }}></div>
+            <div
+              className={classes.progress}
+              style={{ width: `${progress}%` }}
+            ></div>
           </div>
         </div>
         <Button onClick={nextQuestion}>

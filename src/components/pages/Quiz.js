@@ -43,7 +43,7 @@ export default function Quiz() {
   const { loading, error, questions } = useQuestions(id);
 
   // set the question number that being rendered
-  const [currrentQuestion, setCurrrentQuestion] = useState(0);
+  const [currrentQuestionID, setCurrrentQuestionID] = useState(0);
 
   const [qna, dispatch] = useReducer(reducer, intialstate);
 
@@ -59,7 +59,7 @@ export default function Quiz() {
   function handleAnswer(e, index) {
     dispatch({
       type: "answered",
-      questionIndex: currrentQuestion,
+      questionIndex: currrentQuestionID,
       optionIndex: index,
       value: e.target.checked,
     });
@@ -67,17 +67,23 @@ export default function Quiz() {
 
   // next button clicked update current question number > rerenders and fetch options with next question
   function handleNextButton() {
-    if (currrentQuestion + 1 < questions.length) {
-      setCurrrentQuestion((prevCurrent) => prevCurrent + 1);
+    if (currrentQuestionID + 1 < questions.length) {
+      setCurrrentQuestionID((prevCurrent) => prevCurrent + 1);
     }
   }
 
   // prev button clicked update current question number > rerenders and fetch options with next question
   function handlePrevButton() {
-    if (currrentQuestion >= 1 && currrentQuestion <= questions.length) {
-      setCurrrentQuestion((prevCurrent) => prevCurrent - 1);
+    if (currrentQuestionID >= 1 && currrentQuestionID <= questions.length) {
+      setCurrrentQuestionID((prevCurrent) => prevCurrent - 1);
     }
   }
+
+  // calculate progress
+  const progress =
+    questions.length > 0
+      ? ((currrentQuestionID + 1) / questions.length) * 100
+      : 0;
 
   return (
     <>
@@ -85,15 +91,16 @@ export default function Quiz() {
       {error && <div>There was an error!</div>}
       {!loading && !error && qna && qna.length > 0 && (
         <>
-          <h1>{qna[currrentQuestion].title}</h1>
+          <h1>{qna[currrentQuestionID].title}</h1>
           <h4>Question can have multiple answers</h4>
           <Answers
-            options={qna[currrentQuestion].options}
+            options={qna[currrentQuestionID].options}
             handleChange={handleAnswer}
           />
           <ProgressBar
             nextQuestion={handleNextButton}
             prevQuestion={handlePrevButton}
+            progress={progress}
           />
           <MiniPlayer />
         </>

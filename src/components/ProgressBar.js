@@ -19,7 +19,7 @@ export default function ProgressBar({ nextQuestion, prevQuestion, progress, subm
           </div>
         </div>
         <Button onClick={progress ===100 ? submit: nextQuestion}>
-          <span>Next Question</span>
+          <span>{progress ===100 ? 'Submit' : 'Next'} Question</span>
           <span className="material-icons-outlined"> arrow_forward </span>
         </Button>
       </div>

@@ -47,15 +47,17 @@ export default function Result() {
 
     return score;
   }
+
   const userScore = calculateScore();
+
   return (
     <>
       {loading && <div>Loading...</div>}
       {error && <div>There was an error!</div>}
       {!loading && answers && answers.length > 0 && (
         <Fragment>
-          <Summary score={userScore} noq={qna.length} />
-          <Analysis />
+          <Summary score={userScore} noq={answers.length} />
+          <Analysis answers = {answers}/>
         </Fragment>
       )}
     </>

@@ -132,6 +132,7 @@ export default function Quiz() {
           <Answers
             options={qna[currrentQuestionID].options}
             handleChange={handleAnswer}
+            input
           />
           <ProgressBar
             nextQuestion={handleNextButton}

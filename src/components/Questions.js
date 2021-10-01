@@ -1,14 +1,17 @@
 import classes from "../styles/Questions.module.css";
 import Answers from "./Answers";
 
-export default function Question() {
-  return (
-    <div className={classes.question}>
-      <div className={classes.qtitle}>
-        <span className="material-icons-outlined"> help_outline </span>
-        Here goes the question
+export default function Question({ answers }) {
+  console.log(answers);
+  return answers.map((answer, index) => (
+    <>
+      <div className={classes.question} key={index}>
+        <div className={classes.qtitle}>
+          <span className="material-icons-outlined"> help_outline </span>
+          {answer.title}
+        </div>
+        <Answers input= {false} options={answer.options} />
       </div>
-      {/* <Answers /> */}
-    </div>
-  );
+    </>
+  ));
 }

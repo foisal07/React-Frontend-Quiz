@@ -2,7 +2,6 @@ import classes from "../styles/Questions.module.css";
 import Answers from "./Answers";
 
 export default function Question({ answers }) {
-  console.log(answers);
   return answers.map((answer, index) => (
     <>
       <div className={classes.question} key={index}>

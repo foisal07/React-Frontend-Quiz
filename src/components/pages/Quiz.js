@@ -44,10 +44,11 @@ export default function Quiz() {
   const history = useHistory();
 
   // get video id from route url
-  const { id } = useParams();
+  const { id: videoID } = useParams();
+  console.log(videoID);
 
   // fetch questions
-  const { loading, error, questions } = useQuestions(id);
+  const { loading, error, questions } = useQuestions(videoID);
 
   // set the question number that being rendered
   const [currrentQuestionID, setCurrrentQuestionID] = useState(0);
@@ -109,12 +110,12 @@ export default function Quiz() {
 
     // send the answers with videoID into database
     await set(submittedAnswerRef, {
-      [id]: qna,
+      [videoID]: qna,
     });
 
     // redirect quiz page to result page and pass the data for analysis
     history.push({
-      pathname: `/result/${id}`,
+      pathname: `/result/${videoID}`,
       state: {
         qna,
       },
@@ -140,7 +141,7 @@ export default function Quiz() {
             progress={progress}
             submit={submit}
           />
-          <MiniPlayer />
+          <MiniPlayer videoID={videoID} title={qna[currrentQuestionID].title} />
         </>
       )}
     </>
